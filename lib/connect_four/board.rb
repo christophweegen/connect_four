@@ -12,5 +12,15 @@ module ConnectFour
         @rows << Array.new(width)
       end
     end
+
+    # draws board in console
+    def draw
+      @rows.each do |row|
+        row.each do |slot|
+          print slot || "."
+        end
+        puts
+      end
+    end
   end
 end
