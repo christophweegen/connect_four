@@ -1,6 +1,7 @@
 module ConnectFour
   class Board
-    COLUMN_HEADERS = ("0".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
+    CLASSIC_COLUMN_HEADERS = *"1".."8"
+    MULTIPLAYER_COLUMN_HEADERS = ("0".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
 
     attr_reader :width, :height, :rows
 
