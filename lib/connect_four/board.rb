@@ -1,5 +1,7 @@
 module ConnectFour
   class Board
+    COLUMN_HEADERS = ("0".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
+
     attr_reader :width, :height, :rows
 
     def initialize(width: 8, height: 8)
