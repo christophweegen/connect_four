@@ -1,5 +1,9 @@
+require_relative 'draw_helper'
+
 module ConnectFour
   class Board
+    include ConnectFour::DrawHelper
+
     COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
     MIN_BOARD_WIDTH  = 8
     MIN_BOARD_HEIGHT = 8
@@ -23,14 +27,15 @@ module ConnectFour
     # draws board in console
     def draw
       ConnectFour::Prompt.clear
-      @column_headers.each {|char| print char + " " }
+      print center(@column_headers.join(' '))
       puts
       @rows.each do |row|
+        row_string = ""
         row.each do |slot|
           slot = '.' unless slot
-          print slot.to_s + " "
+          row_string << (slot.to_s + " ")
         end
-        puts
+        puts center(row_string)
       end
     end
 
@@ -72,17 +77,17 @@ module ConnectFour
         else
           player_id = player.id
         end
-        puts  "It's your turn #{player.name} (#{player_id}). "
-        text = "Please select the column you want to play: "
-        print text
+        puts center("It's your turn #{player.name}(#{player_id}). ")
+        print center("Please select the column you want to play: ")
         column = gets.chomp
         until @column_headers.include?(column)
           ConnectFour::Prompt.clear
           draw
           puts
-          puts "Column invalid #{player.name} (#{player.id}). " +
-               "Look at the board headers to see valid columns! "
-          print text
+          puts center("Column invalid! " +
+                      "Look at the board headers to see valid columns! ")
+          print center("#{player.name}(#{player.id}), " +
+                       "please select the column you want to play: ")
           column = gets.chomp
         end
         column
