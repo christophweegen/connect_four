@@ -4,7 +4,7 @@ module ConnectFour
     MIN_BOARD_WIDTH  = 8
     MIN_BOARD_HEIGHT = 8
     MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
-    MAX_BOARD_HEIGHT = 50
+    MAX_BOARD_HEIGHT = 100
 
     attr_reader :width, :height, :rows, :headers
 
