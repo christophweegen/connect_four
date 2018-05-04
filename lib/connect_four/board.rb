@@ -77,11 +77,10 @@ module ConnectFour
         else
           player_id = player.id
         end
-        puts center("It's your turn #{player.name}(#{player_id}). ")
-        print center("Please select the column you want to play: ")
+        center_puts("It's your turn, #{player.name}(#{player_id}). ")
+        center_print("Please select the column you want to play: ")
         column = gets.chomp
-        column = prompt_for_valid_column(column: column, player: player)
-        prompt_for_empty_column(column: column, player: player)
+        check_for_valid_and_empty_column(column: column, player: player)
       end
 
       def limit_and_set_board_dimensions(width, height)
@@ -111,7 +110,12 @@ module ConnectFour
         end
       end
 
+      def column_valid?(column)
+        @column_headers.include?(column)
+      end
+
       def column_full?(column)
+        return unless column_valid?(column)
         index_of_column = @column_headers.index(column)
         @rows.reverse_each do |row|
           if row[index_of_column].nil?
@@ -123,28 +127,17 @@ module ConnectFour
         true
       end
 
-      def prompt_for_valid_column(column:, player:)
-        until @column_headers.include?(column)
+      def check_for_valid_and_empty_column(column:, player:)
+        until column_valid?(column) && !column_full?(column)
           ConnectFour::Prompt.clear
+          column_invalid_text = "Column invalid! " +
+                                "Look at the board headers to see valid columns!"
+          column_full_text    = "Column full! Select another column!"
           draw
           puts
-          puts center("Column invalid! " +
-                      "Look at the board headers to see valid columns! ")
-          print center("#{player.name}(#{player.id}), " +
-                       "please select the column you want to play: ")
-          column = gets.chomp
-        end
-        column
-      end
-
-      def prompt_for_empty_column(column:, player:)
-        while column_full?(column)
-          ConnectFour::Prompt.clear
-          draw
-          puts
-          puts center("Column full! " +
-                      "Choose another column! ")
-          print center("#{player.name}(#{player.id}), " +
+          center_puts(column_invalid_text) unless @column_headers.include?(column)
+          center_puts(column_full_text) if column_full?(column)
+          center_print("#{player.name}(#{player.id}), " +
                        "please select the column you want to play: ")
           column = gets.chomp
         end
