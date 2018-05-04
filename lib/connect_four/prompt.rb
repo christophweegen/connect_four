@@ -33,14 +33,15 @@ module ConnectFour
         player_count
       end
 
-      def prompt_for_player_setup(player_count)
+      def prompt_for_player_names(player_count)
         players = []
         player_count.times do |i|
           clear
           id = i + 1
           print "Please enter name for player #{id}: "
-          player_name = gets.chomp
-          players << ConnectFour::Player.new(id: id, name: player_name)
+          name = gets.chomp.strip
+          name = "Player" if name.empty?
+          players << ConnectFour::Player.new(id: id, name: name)
         end
         players
       end
