@@ -80,17 +80,8 @@ module ConnectFour
         puts center("It's your turn #{player.name}(#{player_id}). ")
         print center("Please select the column you want to play: ")
         column = gets.chomp
-        until @column_headers.include?(column)
-          ConnectFour::Prompt.clear
-          draw
-          puts
-          puts center("Column invalid! " +
-                      "Look at the board headers to see valid columns! ")
-          print center("#{player.name}(#{player.id}), " +
-                       "please select the column you want to play: ")
-          column = gets.chomp
-        end
-        column
+        column = prompt_for_valid_column(column: column, player: player)
+        prompt_for_empty_column(column: column, player: player)
       end
 
       def limit_and_set_board_dimensions(width, height)
@@ -118,6 +109,46 @@ module ConnectFour
         else
           @height = height
         end
+      end
+
+      def column_full?(column)
+        index_of_column = @column_headers.index(column)
+        @rows.reverse_each do |row|
+          if row[index_of_column].nil?
+            return false
+          else
+            next
+          end
+        end
+        true
+      end
+
+      def prompt_for_valid_column(column:, player:)
+        until @column_headers.include?(column)
+          ConnectFour::Prompt.clear
+          draw
+          puts
+          puts center("Column invalid! " +
+                      "Look at the board headers to see valid columns! ")
+          print center("#{player.name}(#{player.id}), " +
+                       "please select the column you want to play: ")
+          column = gets.chomp
+        end
+        column
+      end
+
+      def prompt_for_empty_column(column:, player:)
+        while column_full?(column)
+          ConnectFour::Prompt.clear
+          draw
+          puts
+          puts center("Column full! " +
+                      "Choose another column! ")
+          print center("#{player.name}(#{player.id}), " +
+                       "please select the column you want to play: ")
+          column = gets.chomp
+        end
+        column
       end
   end
 end
