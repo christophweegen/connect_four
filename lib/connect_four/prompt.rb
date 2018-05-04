@@ -83,6 +83,20 @@ module ConnectFour
         height
       end
 
+      def prompt_for_column_to_play(player:, column_headers:)
+        puts  "It's your turn #{player.name} (#{player.id}). "
+        text = "Please select the column you want to play: "
+        print text
+        column = gets.chomp
+        until column_headers.include?(column)
+          clear
+          puts "Column invalid. Look at the board headers to see valid columns! "
+          print text
+          column = gets.chomp
+        end
+        column
+      end
+
       def clear
         system "clear" or system "cls"
       end

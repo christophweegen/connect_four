@@ -6,13 +6,13 @@ module ConnectFour
     MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
     MAX_BOARD_HEIGHT = 100
 
-    attr_reader :width, :height, :rows, :headers, :players
+    attr_reader :width, :height, :rows, :column_headers, :players
 
     def initialize(width: 8, height: 8, players:)
       limit_and_set_board_dimensions(width, height)
       @players = players
       @rows    = []
-      @headers = COLUMN_HEADERS[0..(@width - 1)]
+      @column_headers = COLUMN_HEADERS[0..(@width - 1)]
 
       # initialize board as two-dimensional array
       @height.times do
@@ -22,7 +22,7 @@ module ConnectFour
 
     # draws board in console
     def draw
-      @headers.each {|char| print char + " " }
+      @column_headers.each {|char| print char + " " }
       puts
       @rows.each do |row|
         row.each do |slot|
@@ -32,8 +32,10 @@ module ConnectFour
       end
     end
 
-    def play
+    def claim_slot(column:, player:)
+    end
 
+    def play
     end
 
 
