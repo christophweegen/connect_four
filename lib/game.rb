@@ -21,3 +21,5 @@ when 2
                                         height:  height,
                                         players: players)
 end
+
+board.play

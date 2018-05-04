@@ -22,6 +22,7 @@ module ConnectFour
 
     # draws board in console
     def draw
+      ConnectFour::Prompt.clear
       @column_headers.each {|char| print char + " " }
       puts
       @rows.each do |row|
@@ -32,29 +33,39 @@ module ConnectFour
       end
     end
 
-    def claim_slot(player)
-      column = ConnectFour::Prompt.prompt_for_column_to_play
-      index_of_column = @column_headers.index(column)
-      @rows.reverse_each do |row|
-        if row[index_of_column].nil?
-          if @players.size == 2
-            row[index_of_column] = player.id == 1 ? "X" : "O"
-            break
-          else
-            row[index_of_column] = player.id
-            break
-          end
-        else
-          next
+    def play
+      winner = nil
+      until winner
+        players.cycle do |player|
+          draw
+          puts
+          claim_slot(player)
+          # check_for_winner
         end
       end
+      # applaud(winner)
     end
-
-    def play
-    end
-
 
     private
+      def claim_slot(player)
+        column = ConnectFour::Prompt.prompt_for_column_to_play(player: player,
+                                                               column_headers: @column_headers)
+        index_of_column = @column_headers.index(column)
+        @rows.reverse_each do |row|
+          if row[index_of_column].nil?
+            if @players.size == 2
+              row[index_of_column] = player.id == 1 ? "X" : "O"
+              break
+            else
+              row[index_of_column] = player.id
+              break
+            end
+          else
+            next
+          end
+        end
+      end
+
       def limit_and_set_board_dimensions(width, height)
         # limit and set board width
         if width  <  MIN_BOARD_WIDTH
