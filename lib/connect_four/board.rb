@@ -27,7 +27,8 @@ module ConnectFour
       puts
       @rows.each do |row|
         row.each do |slot|
-          print((slot || ".") + " ")
+          slot = '.' unless slot
+          print slot.to_s + " "
         end
         puts
       end
@@ -48,8 +49,7 @@ module ConnectFour
 
     private
       def claim_slot(player)
-        column = ConnectFour::Prompt.prompt_for_column_to_play(player: player,
-                                                               column_headers: @column_headers)
+        column = prompt_for_column_to_play(player)
         index_of_column = @column_headers.index(column)
         @rows.reverse_each do |row|
           if row[index_of_column].nil?
@@ -64,6 +64,28 @@ module ConnectFour
             next
           end
         end
+      end
+
+      def prompt_for_column_to_play(player)
+        if @players.size == 2
+          player_id = player.id == 1 ? "X" : "O"
+        else
+          player_id = player.id
+        end
+        puts  "It's your turn #{player.name} (#{player_id}). "
+        text = "Please select the column you want to play: "
+        print text
+        column = gets.chomp
+        until @column_headers.include?(column)
+          ConnectFour::Prompt.clear
+          draw
+          puts
+          puts "Column invalid #{player.name} (#{player.id}). " +
+               "Look at the board headers to see valid columns! "
+          print text
+          column = gets.chomp
+        end
+        column
       end
 
       def limit_and_set_board_dimensions(width, height)
