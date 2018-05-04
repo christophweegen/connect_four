@@ -6,4 +6,9 @@ class PlayerTest < ConnectFourSpec
     assert player.id == 1
     assert player.name == "Player1"
   end
+
+  def test_player_id_is_required_kwarg
+    e = assert_raises(ArgumentError) { ConnectFour::Player.new }
+    assert_equal e.message, "missing keyword: id"
+  end
 end
