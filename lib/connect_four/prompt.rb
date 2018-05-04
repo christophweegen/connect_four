@@ -33,6 +33,19 @@ module ConnectFour
         player_count
       end
 
+      def prompt_for_player_setup(player_count)
+        players = []
+        player_count.times do |i|
+          clear
+          id = i + 1
+          print "Please enter name for player #{id}: "
+          player_name = gets.chomp
+          players << ConnectFour::Player.new(id: id, name: player_name)
+        end
+        players
+      end
+
+
       def prompt_for_board_width(player_count)
         clear
         min_board_width = ConnectFour::Board::MIN_BOARD_WIDTH

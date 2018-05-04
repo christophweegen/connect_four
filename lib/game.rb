@@ -13,6 +13,7 @@ when 1
 when 2
   # initialize Multiplayer Board
   player_count = ConnectFour::Prompt.prompt_for_player_count
+  players      = ConnectFour::Prompt.prompt_for_player_setup(player_count)
   width        = ConnectFour::Prompt.prompt_for_board_width(player_count)
   height       = ConnectFour::Prompt.prompt_for_board_height(player_count)
   board        = ConnectFour::Board.new(width: width, height: height)
