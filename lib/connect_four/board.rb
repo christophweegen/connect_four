@@ -6,10 +6,11 @@ module ConnectFour
     MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
     MAX_BOARD_HEIGHT = 100
 
-    attr_reader :width, :height, :rows, :headers
+    attr_reader :width, :height, :rows, :headers, :players
 
-    def initialize(width: 8, height: 8)
+    def initialize(width: 8, height: 8, players:)
       limit_and_set_board_dimensions(width, height)
+      @players = players
       @rows    = []
       @headers = COLUMN_HEADERS[0..(@width - 1)]
 
@@ -30,6 +31,11 @@ module ConnectFour
         puts
       end
     end
+
+    def play
+
+    end
+
 
     private
       def limit_and_set_board_dimensions(width, height)
