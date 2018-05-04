@@ -32,7 +32,22 @@ module ConnectFour
       end
     end
 
-    def claim_slot(column:, player:)
+    def claim_slot(player)
+      column = ConnectFour::Prompt.prompt_for_column_to_play
+      index_of_column = @column_headers.index(column)
+      @rows.reverse_each do |row|
+        if row[index_of_column].nil?
+          if @players.size == 2
+            row[index_of_column] = player.id == 1 ? "X" : "O"
+            break
+          else
+            row[index_of_column] = player.id
+            break
+          end
+        else
+          next
+        end
+      end
     end
 
     def play
