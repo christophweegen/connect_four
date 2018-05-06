@@ -1,5 +1,9 @@
+require_relative 'color_output'
+
 module ConnectFour
   module DrawHelper
+    include ColorOutput
+
     def clear_screen
       system "clear" or system "cls"
     end
@@ -29,11 +33,21 @@ module ConnectFour
       center_puts @column_headers.join(' ')
       @rows.each do |row|
         row_string = ""
+        slots_filled_in_row = 0
         row.each do |slot|
-          slot = '.' unless slot
-          row_string << (slot.to_s + " ")
+          if slot
+            color_code = slot
+            color_code = 1 if slot == "X"
+            color_code = 2 if slot == "O"
+            color_code = COLOR_CODES[color_code]
+            slot = slot.to_s.colorize(color_code)
+            slots_filled_in_row += 1
+          else
+            slot = '.'
+          end
+          row_string << (slot + " ")
         end
-        center_puts(row_string)
+        center_puts(('           ' * slots_filled_in_row) + row_string)
       end
     end
   end
