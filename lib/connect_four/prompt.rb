@@ -19,6 +19,7 @@ module ConnectFour
       game_mode = gets.chomp.to_i
       until (1..2) === game_mode
         clear_screen
+        print_logo
         center_puts "Game mode invalid. Please enter 1 for Classic Mode " +
              "or 2 for Multiplayer Mode."
         center_print "Enter number of game mode: "
