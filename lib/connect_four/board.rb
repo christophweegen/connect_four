@@ -1,8 +1,10 @@
 require_relative 'draw_helper'
+require_relative 'prompt'
 
 module ConnectFour
   class Board
     include ConnectFour::DrawHelper
+    extend  ConnectFour::Prompt
 
     COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
     MIN_BOARD_WIDTH  = 8
@@ -11,6 +13,28 @@ module ConnectFour
     MAX_BOARD_HEIGHT = 100
 
     attr_reader :width, :height, :rows, :column_headers, :players
+
+    def self.setup_board
+      puts "Welcome to Multiplayer Connect Four!"
+      game_mode = prompt_for_game_mode
+
+      case game_mode
+      when 1
+        # initialize 2 Players & Classic Board
+        player_count = 2
+        players = prompt_for_player_names(player_count)
+        board   = new(players: players)
+      when 2
+        # initialize Multiplayer Setup
+        player_count = prompt_for_player_count
+        players      = prompt_for_player_names(player_count)
+        width        = prompt_for_board_width(player_count)
+        height       = prompt_for_board_height(player_count)
+        board        = new(width:   width,
+                           height:  height,
+                           players: players)
+      end
+    end
 
     def initialize(width: 8, height: 8, players:)
       limit_and_set_board_dimensions(width, height)
