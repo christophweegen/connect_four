@@ -19,7 +19,7 @@ module ConnectFour
     end
 
     # draws board in console
-    def draw
+    def draw_board
       ConnectFour::Prompt.clear
       print_logo
       center_puts @column_headers.join(' ')

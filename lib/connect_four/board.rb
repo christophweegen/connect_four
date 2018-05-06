@@ -28,7 +28,7 @@ module ConnectFour
       winner = nil
       until winner
         players.cycle do |player|
-          draw
+          draw_board
           puts
           claim_slot(player)
           # check_for_winner
@@ -118,7 +118,7 @@ module ConnectFour
           column_invalid_text = "Column invalid! " +
                                 "Look at the board headers to see valid columns!"
           column_full_text    = "Column full! Select another column!"
-          draw
+          draw_board
           puts
           center_puts(column_invalid_text) unless @column_headers.include?(column)
           center_puts(column_full_text) if column_full?(column)
