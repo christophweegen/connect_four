@@ -114,7 +114,7 @@ module ConnectFour
 
       def check_for_valid_and_empty_column(column:, player:)
         until column_valid?(column) && !column_full?(column)
-          ConnectFour::Prompt.clear
+          clear_screen
           column_invalid_text = "Column invalid! " +
                                 "Look at the board headers to see valid columns!"
           column_full_text    = "Column full! Select another column!"

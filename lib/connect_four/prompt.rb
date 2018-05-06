@@ -1,9 +1,9 @@
 module ConnectFour
   module Prompt
-    extend ConnectFour::DrawHelper
+    include ConnectFour::DrawHelper
     class << self
       def prompt_for_game_mode
-        clear
+        clear_screen
         print_logo
         center_puts "Welcome to Multiplayer Connect Four!"
         puts
@@ -18,7 +18,7 @@ module ConnectFour
         center_print "Enter number of game mode: "
         game_mode = gets.chomp.to_i
         until (1..2) === game_mode
-          clear
+          clear_screen
           center_puts "Game mode invalid. Please enter 1 for Classic Mode " +
                "or 2 for Multiplayer Mode."
           center_print "Enter number of game mode: "
@@ -28,12 +28,12 @@ module ConnectFour
       end
 
       def prompt_for_player_count
-        clear
+        clear_screen
         print_logo
         center_print "Please enter number of players (2-20): "
         player_count = gets.chomp.to_i
         until (2..20) === player_count
-          clear
+          clear_screen
           center_puts "Number of players invalid. Please enter a number from 2 to 20."
           center_print "Please enter number of players (2-20): "
           player_count = gets.chomp.to_i
@@ -44,7 +44,7 @@ module ConnectFour
       def prompt_for_player_names(player_count)
         players = []
         player_count.times do |i|
-          clear
+          clear_screen
           print_logo
           id = i + 1
           center_print "Please enter name for player #{id}: "
@@ -57,7 +57,7 @@ module ConnectFour
 
 
       def prompt_for_board_width(player_count)
-        clear
+        clear_screen
         print_logo
         min_board_width = ConnectFour::Board::MIN_BOARD_WIDTH
         max_board_width = ConnectFour::Board::MAX_BOARD_WIDTH
@@ -68,7 +68,7 @@ module ConnectFour
                      "width should be at least #{player_count * 4}: "
         width = gets.chomp.to_i
         until (min_board_width..max_board_width) === width
-          clear
+          clear_screen
           center_print "Width invalid. Please enter a number from " +
                        "#{min_board_width} to #{max_board_width}: "
           width = gets.chomp.to_i
@@ -77,7 +77,7 @@ module ConnectFour
       end
 
       def prompt_for_board_height(player_count)
-        clear
+        clear_screen
         print_logo
         min_board_height = ConnectFour::Board::MIN_BOARD_HEIGHT
         max_board_height = ConnectFour::Board::MAX_BOARD_HEIGHT
@@ -88,15 +88,11 @@ module ConnectFour
                      "height should be at least #{player_count.to_i * 4}: "
         height = gets.chomp.to_i
         until (min_board_height..max_board_height) === height
-          clear
+          clear_screen
           center_print "Width invalid. Please enter a number from #{min_board_width} to #{max_board_width}: "
           height = gets.chomp.to_i
         end
         height
-      end
-
-      def clear
-        system "clear" or system "cls"
       end
     end
   end

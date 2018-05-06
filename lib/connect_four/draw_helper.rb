@@ -1,5 +1,9 @@
 module ConnectFour
   module DrawHelper
+    def clear_screen
+      system "clear" or system "cls"
+    end
+
     def center(string)
       string.rjust(`tput cols`.to_i/2 + string.size/2)
     end
@@ -20,7 +24,7 @@ module ConnectFour
 
     # draws board in console
     def draw_board
-      ConnectFour::Prompt.clear
+      clear_screen
       print_logo
       center_puts @column_headers.join(' ')
       @rows.each do |row|
