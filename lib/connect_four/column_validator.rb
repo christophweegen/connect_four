@@ -1,5 +1,5 @@
 module ConnectFour
-  module ColumnChecker
+  module ColumnValidator
     private
       def column_valid?(column)
         @column_headers.include?(column)

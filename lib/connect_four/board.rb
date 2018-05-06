@@ -1,12 +1,12 @@
 require_relative 'draw_helper'
 require_relative 'prompt'
-require_relative 'column_checker'
+require_relative 'column_validator'
 
 module ConnectFour
   class Board
     extend  ConnectFour::Prompt
     include ConnectFour::DrawHelper
-    include ConnectFour::ColumnChecker
+    include ConnectFour::ColumnValidator
 
     COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
     MIN_BOARD_WIDTH  = 8
