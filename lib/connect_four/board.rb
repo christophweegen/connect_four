@@ -24,21 +24,6 @@ module ConnectFour
       end
     end
 
-    # draws board in console
-    def draw
-      ConnectFour::Prompt.clear
-      print_logo
-      center_puts @column_headers.join(' ')
-      @rows.each do |row|
-        row_string = ""
-        row.each do |slot|
-          slot = '.' unless slot
-          row_string << (slot.to_s + " ")
-        end
-        center_puts(row_string)
-      end
-    end
-
     def play
       winner = nil
       until winner
