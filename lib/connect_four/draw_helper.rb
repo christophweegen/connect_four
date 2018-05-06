@@ -47,7 +47,7 @@ module ConnectFour
           end
           row_string << (slot + " ")
         end
-        center_puts(('           ' * slots_filled_in_row) + row_string)
+        center_puts((' ' * 11 * slots_filled_in_row) + row_string)
       end
     end
   end

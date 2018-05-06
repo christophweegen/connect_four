@@ -13,6 +13,7 @@ module ConnectFour
     MIN_BOARD_HEIGHT = 8
     MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
     MAX_BOARD_HEIGHT = 100
+    MAX_PLAYER_COUNT = 5
 
     attr_reader :width, :height, :rows, :column_headers, :players
 
@@ -88,7 +89,10 @@ module ConnectFour
         else
           player_id = player.id
         end
-        center_puts("It's your turn, #{player.name}(#{player_id}). ")
+        colors = ConnectFour::ColorOutput::COLOR_CODES
+        name = player.name + "(" + player_id.to_s + ")"
+        name = name.colorize(colors[player.id])
+        center_puts((" " * 11) + "It's your turn, #{name}")
         center_print("Please select the column you want to play: ")
         column = gets.chomp
         check_for_valid_and_empty_column(column: column, player: player)
