@@ -9,7 +9,8 @@ game_mode = ConnectFour::Prompt.prompt_for_game_mode
 case game_mode
 when 1
   # initialize 2 Players & Classic Board
-  players = ConnectFour::Prompt.prompt_for_player_names(2)
+  player_count = 2
+  players = ConnectFour::Prompt.prompt_for_player_names(player_count)
   board   = ConnectFour::Board.new(players: players)
 when 2
   # initialize Multiplayer Setup
