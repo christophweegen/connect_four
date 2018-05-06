@@ -31,12 +31,12 @@ module ConnectFour
     def prompt_for_player_count
       clear_screen
       print_logo
-      center_print "Please enter number of players (2-20): "
+      center_print "Please enter number of players (2-9): "
       player_count = gets.chomp.to_i
-      until (2..20) === player_count
+      until (2..9) === player_count
         clear_screen
-        center_puts "Number of players invalid. Please enter a number from 2 to 20."
-        center_print "Please enter number of players (2-20): "
+        center_puts "Number of players invalid. Please enter a number from 2 to 9."
+        center_print "Please enter number of players (2-9): "
         player_count = gets.chomp.to_i
       end
       player_count
