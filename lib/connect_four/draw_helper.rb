@@ -22,6 +22,7 @@ module ConnectFour
 
     def print_logo
       logo = "##### Multiplayer Connect Four #####"
+      2.times { puts }
       center_puts logo
       puts
     end
