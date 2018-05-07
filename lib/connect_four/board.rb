@@ -8,7 +8,6 @@ module ConnectFour
     extend  ConnectFour::Prompt
     include ConnectFour::DrawHelper
     include ConnectFour::ColumnValidator
-    include ConnectFour::WinnerChecker
 
     COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
     MIN_BOARD_WIDTH  = 8
@@ -57,7 +56,8 @@ module ConnectFour
         draw_board
         puts
         claim_slot(player)
-        winner = check_for_winner
+        winner_checker = ConnectFour::WinnerChecker.new(rows: @rows, players: @players)
+        winner = winner_checker.check_for_winner
         if winner
           draw_winner_board(winner)
           return

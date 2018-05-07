@@ -1,13 +1,17 @@
 module ConnectFour
-  module WinnerChecker
-    def check_for_winner
-      rows = self.rows
-      check_horizontal(rows)   || check_vertical(rows) ||
-      check_diagonal_asc(rows) || check_diagonal_desc(rows)
+  class WinnerChecker
+    def initialize(rows:, players:)
+      @rows = rows
+      @players = players
     end
 
-    def check_horizontal(rows)
-      rows.reverse_each.with_index do |row, row_index|
+    def check_for_winner
+      check_horizontal   || check_vertical ||
+      check_diagonal_asc || check_diagonal_desc
+    end
+
+    def check_horizontal
+      @rows.reverse_each.with_index do |row, row_index|
         return nil unless row.any?
         row.each_with_index do |slot, slot_index|
           next unless slot
@@ -27,12 +31,12 @@ module ConnectFour
       nil
     end
 
-    def check_vertical(rows)
-      rows.reverse_each.with_index do |row, row_index|
-        return nil if row_index == rows.size - 3
+    def check_vertical
+      @rows.reverse_each.with_index do |row, row_index|
+        return nil if row_index == @rows.size - 3
         row.each_with_index do |slot, slot_index|
           next unless slot
-          rev_rows = rows.reverse
+          rev_rows = @rows.reverse
           next unless rev_rows[row_index + 1][slot_index] == slot
           next unless rev_rows[row_index + 2][slot_index] == slot
           next unless rev_rows[row_index + 3][slot_index] == slot
@@ -42,13 +46,13 @@ module ConnectFour
       nil
     end
 
-    def check_diagonal_asc(rows)
-      rows.reverse_each.with_index do |row, row_index|
-        return nil if row_index == rows.size - 3
+    def check_diagonal_asc
+      @rows.reverse_each.with_index do |row, row_index|
+        return nil if row_index == @rows.size - 3
         row.each_with_index do |slot, slot_index|
           break if slot_index == row.size - 3
           next unless slot
-          rev_rows = rows.reverse
+          rev_rows = @rows.reverse
           next unless rev_rows[row_index + 1][slot_index + 1] == slot
           next unless rev_rows[row_index + 2][slot_index + 2] == slot
           next unless rev_rows[row_index + 3][slot_index + 3] == slot
@@ -58,15 +62,15 @@ module ConnectFour
       nil
     end
 
-    def check_diagonal_desc(rows)
-      rows.each_with_index do |row, row_index|
-        return nil if row_index == rows.size - 3
+    def check_diagonal_desc
+      @rows.each_with_index do |row, row_index|
+        return nil if row_index == @rows.size - 3
         row.each_with_index do |slot, slot_index|
           break if slot_index == row.size - 3
           next unless slot
-          next unless rows[row_index + 1][slot_index + 1] == slot
-          next unless rows[row_index + 2][slot_index + 2] == slot
-          next unless rows[row_index + 3][slot_index + 3] == slot
+          next unless @rows[row_index + 1][slot_index + 1] == slot
+          next unless @rows[row_index + 2][slot_index + 2] == slot
+          next unless @rows[row_index + 3][slot_index + 3] == slot
           return winner = @players[slot - 1]
         end
       end
