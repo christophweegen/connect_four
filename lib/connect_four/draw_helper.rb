@@ -85,6 +85,7 @@ module ConnectFour
       end
       puts
       center_puts "We have a winner!!!!! The winner is #{winner.name}(#{winner_id})"
+      2.times { puts }
     end
   end
 end

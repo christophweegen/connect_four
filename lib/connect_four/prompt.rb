@@ -10,9 +10,9 @@ module ConnectFour
       center_puts "Please choose game mode:"
       puts
       center_puts "-----------------------------------------------------------------------"
-      center_puts "1) Classic Mode     | Players: 2       | Board Size: 8x8               "
+      center_puts "1) Classic Mode     | Players: 2      | Board Size: 8x8               "
       center_puts "-----------------------------------------------------------------------"
-      center_puts "2) Multiplayer Mode | Up to 20 Players | Board Size: From 8x8 to 61x100"
+      center_puts "2) Multiplayer Mode | Up to 5 Players | Board Size: From 8x8 to 61x100"
       center_puts "-----------------------------------------------------------------------"
       puts
       center_print "Enter number of game mode: "
@@ -49,7 +49,7 @@ module ConnectFour
         clear_screen
         print_logo
         id = i + 1
-        center_print "Please enter name for player #{id}: "
+        center_print "Please enter name for player #{id} ( defaults to 'Player'): "
         name = gets.chomp.strip
         name = "Player" if name.empty?
         players << ConnectFour::Player.new(id: id, name: name)

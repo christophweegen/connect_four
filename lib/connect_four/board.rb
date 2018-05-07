@@ -20,7 +20,6 @@ module ConnectFour
     attr_reader :width, :height, :rows, :column_headers, :players
 
     def self.setup_board
-      puts "Welcome to Multiplayer Connect Four!"
       game_mode = prompt_for_game_mode
 
       case game_mode
@@ -54,7 +53,6 @@ module ConnectFour
     end
 
     def play
-      winner = nil
       @players.cycle do |player|
         draw_board
         puts
