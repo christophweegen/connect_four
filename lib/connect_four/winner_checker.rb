@@ -1,5 +1,3 @@
-require 'pry'
-
 module ConnectFour
   module WinnerChecker
     def check_for_winner
