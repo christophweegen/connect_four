@@ -8,14 +8,7 @@ module ConnectFour
       def column_full?(column)
         return unless column_valid?(column)
         index_of_column = @column_headers.index(column)
-        @rows.reverse_each do |row|
-          if row[index_of_column].nil?
-            return false
-          else
-            next
-          end
-        end
-        true
+        @rows[0][index_of_column] ? true : false
       end
 
       def check_for_valid_and_empty_column(column:, player:)

@@ -24,6 +24,7 @@ module ConnectFour
           #          hit_coordinates: hit_coordinates }
         end
       end
+      nil
     end
 
     def check_vertical(rows)
@@ -38,6 +39,7 @@ module ConnectFour
           return winner = @players[slot - 1]
         end
       end
+      nil
     end
 
     def check_diagonal_asc(rows)
@@ -53,6 +55,7 @@ module ConnectFour
           return winner = @players[slot - 1]
         end
       end
+      nil
     end
 
     def check_diagonal_desc(rows)
@@ -67,6 +70,7 @@ module ConnectFour
           return winner = @players[slot - 1]
         end
       end
+      nil
     end
   end
 end
