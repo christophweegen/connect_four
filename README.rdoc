@@ -73,7 +73,7 @@ Fork from https://github.com/neopoly/connect_four
   git clone git@github.com:YOURNAME/connect_four.git
   cd connect_four
   # mit rvm:
-  # ruby -v         # -> 2.4.1
+  # ruby -v         # -> 2.5.1
   bundle
   rake
 
@@ -81,13 +81,13 @@ Fork from https://github.com/neopoly/connect_four
 
 === Ruby
 
-  ruby-2.4.1
+  ruby-2.5.1
 
 === Ruby version manager (rvm)
 
-  rvm install ruby-2.4.1
-  rvm use 2.4.1
-  ruby -v # => 2.4.1
+  rvm install ruby-2.5.1
+  rvm use 2.5.1
+  ruby -v # => 2.5.1
 
 === Gems
 
