@@ -2,11 +2,8 @@ module ConnectFour
   module WinnerChecker
     def check_for_winner
       rows = self.rows
-      horizontal    = check_horizontal(rows)
-      vertical      = check_vertical(rows)
-      diagonal_asc  = check_diagonal_asc(rows)
-      diagonal_desc = check_diagonal_desc(rows)
-      horizontal || vertical || diagonal_asc || diagonal_desc
+      check_horizontal(rows)   || check_vertical(rows) ||
+      check_diagonal_asc(rows) || check_diagonal_desc(rows)
     end
 
     def check_horizontal(rows)
@@ -22,8 +19,9 @@ module ConnectFour
           4.times do |i|
             hit_coordinates << [row_index, slot_index - 1 + i]
           end
-          return { winner: @players[slot - 1],
-                   hit_coordinates: hit_coordinates }
+          return winner = @players[slot - 1]
+          # return { winner: @players[slot - 1],
+          #          hit_coordinates: hit_coordinates }
         end
       end
     end

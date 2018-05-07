@@ -58,6 +58,11 @@ module ConnectFour
       clear_screen
       print_logo
       center_puts @column_headers.join(' ')
+      winner_id = winner.id
+      if @players.size == 2
+        winner_id = "X" if winner.id == 1
+        winner_id = "O" if winner.id == 2
+      end
       @rows.each do |row|
         row_string = ""
         slots_filled_in_row = 0
@@ -79,7 +84,7 @@ module ConnectFour
         center_puts((' ' * 11 * slots_filled_in_row) + row_string)
       end
       puts
-      center_puts "We have a winner!!!!! The winner is #{winner.name} (#{winner.id})"
+      center_puts "We have a winner!!!!! The winner is #{winner.name}(#{winner_id})"
     end
   end
 end
