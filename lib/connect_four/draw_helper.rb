@@ -38,8 +38,10 @@ module ConnectFour
         row.each do |slot|
           if slot
             color_code = slot
-            color_code = 1 if slot == "X"
-            color_code = 2 if slot == "O"
+            if @players.size == 2
+              slot = "X" if slot == 1
+              slot = "O" if slot == 2
+            end
             color_code = COLOR_CODES[color_code]
             slot = slot.to_s.colorize(color_code)
             slots_filled_in_row += 1
@@ -50,6 +52,34 @@ module ConnectFour
         end
         center_puts((' ' * 11 * slots_filled_in_row) + row_string)
       end
+    end
+
+    def draw_winner_board(winner)
+      clear_screen
+      print_logo
+      center_puts @column_headers.join(' ')
+      @rows.each do |row|
+        row_string = ""
+        slots_filled_in_row = 0
+        row.each do |slot|
+          if slot
+            color_code = slot
+            if @players.size == 2
+              slot = "X" if slot == 1
+              slot = "O" if slot == 2
+            end
+            color_code = COLOR_CODES[color_code]
+            slot = slot.to_s.colorize(color_code)
+            slots_filled_in_row += 1
+          else
+            slot = '.'
+          end
+          row_string << (slot + " ")
+        end
+        center_puts((' ' * 11 * slots_filled_in_row) + row_string)
+      end
+      puts
+      center_puts "We have a winner!!!!! The winner is #{winner.name} (#{winner.id})"
     end
   end
 end

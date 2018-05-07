@@ -1,12 +1,14 @@
 require_relative 'draw_helper'
 require_relative 'prompt'
 require_relative 'column_validator'
+require_relative 'winner_checker'
 
 module ConnectFour
   class Board
     extend  ConnectFour::Prompt
     include ConnectFour::DrawHelper
     include ConnectFour::ColumnValidator
+    include ConnectFour::WinnerChecker
 
     COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
     MIN_BOARD_WIDTH  = 8
@@ -53,15 +55,16 @@ module ConnectFour
 
     def play
       winner = nil
-      until winner
-        players.cycle do |player|
-          draw_board
-          puts
-          claim_slot(player)
-          # check_for_winner
+      @players.cycle do |player|
+        draw_board
+        puts
+        claim_slot(player)
+        winner = check_for_winner
+        if winner
+          draw_winner_board(winner)
+          return
         end
       end
-      # applaud(winner)
     end
 
     private
@@ -70,13 +73,8 @@ module ConnectFour
         index_of_column = @column_headers.index(column)
         @rows.reverse_each do |row|
           if row[index_of_column].nil?
-            if @players.size == 2
-              row[index_of_column] = player.id == 1 ? "X" : "O"
-              break
-            else
-              row[index_of_column] = player.id
-              break
-            end
+            row[index_of_column] = player.id
+            break
           else
             next
           end
