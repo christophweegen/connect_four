@@ -3,6 +3,7 @@ module ConnectFour
     ARRAY_OFFSET = 1
     USELESS_LAST_SLOTS_TO_CHECK = 3
     USELESS_LAST_ROWS_TO_CHECK = 3
+    # CONSECUTIVE_SLOTS_NEEDED_TO_WIN = 4
 
     def initialize(rows:, players:)
       @rows = rows
@@ -23,10 +24,10 @@ module ConnectFour
           next unless row[slot_index + 1] == slot
           next unless row[slot_index + 2] == slot
           next unless row[slot_index + 3] == slot
-          hit_coordinates = []
-          4.times do |i|
-            hit_coordinates << [row_index, slot_index - 1 + i]
-          end
+          # hit_coordinates = []
+          # CONSECUTIVE_SLOTS_NEEDED_TO_WIN.times do |i|
+          #   hit_coordinates << [row_index, slot_index - 1 + i]
+          # end
           winner_id = slot - ARRAY_OFFSET
           return winner = @players[winner_id]
           # return { winner: @players[slot - 1],
