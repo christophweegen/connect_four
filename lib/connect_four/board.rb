@@ -14,6 +14,7 @@ module ConnectFour
     MIN_BOARD_HEIGHT = 8
     MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
     MAX_BOARD_HEIGHT = 100
+    MIN_PLAYER_COUNT = 2
     MAX_PLAYER_COUNT = 5
 
     attr_reader :width, :height, :rows, :column_headers, :players
@@ -24,10 +25,10 @@ module ConnectFour
       case game_mode
       when 1
         # initialize 2 Players & Classic Board
-        player_count = 2
+        player_count = MIN_PLAYER_COUNT
         players = prompt_for_player_names(player_count)
         board   = new(players: players)
-      when 2
+      when MIN_PLAYER_COUNT
         # initialize Multiplayer Setup
         player_count = prompt_for_player_count
         players      = prompt_for_player_names(player_count)
@@ -80,7 +81,7 @@ module ConnectFour
       end
 
       def prompt_for_column_to_play(player)
-        if @players.size == 2
+        if @players.size == MIN_PLAYER_COUNT
           player_id = player.id == 1 ? "X" : "O"
         else
           player_id = player.id
