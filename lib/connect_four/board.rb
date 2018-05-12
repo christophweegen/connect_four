@@ -1,50 +1,19 @@
 require_relative 'draw_helper'
-require_relative 'prompt'
 require_relative 'column_validator'
 require_relative 'winner_checker'
 
 module ConnectFour
   class Board
-    extend  ConnectFour::Prompt
     include ConnectFour::DrawHelper
     include ConnectFour::ColumnValidator
 
-    COLUMN_HEADERS = ("1".."9").to_a + ("a".."z").to_a + ("A".."Z").to_a
-    MIN_BOARD_WIDTH  = 8
-    MIN_BOARD_HEIGHT = 8
-    MAX_BOARD_WIDTH  = COLUMN_HEADERS.size
-    MAX_BOARD_HEIGHT = 100
-    MIN_PLAYER_COUNT = 2
-    MAX_PLAYER_COUNT = 5
-
     attr_reader :width, :height, :rows, :column_headers, :players
-
-    def self.setup_board
-      game_mode = prompt_for_game_mode
-
-      case game_mode
-      when 1
-        # initialize 2 Players & Classic Board
-        player_count = MIN_PLAYER_COUNT
-        players = prompt_for_player_names(player_count)
-        board   = new(players: players)
-      when MIN_PLAYER_COUNT
-        # initialize Multiplayer Setup
-        player_count = prompt_for_player_count
-        players      = prompt_for_player_names(player_count)
-        width        = prompt_for_board_width(player_count)
-        height       = prompt_for_board_height(player_count)
-        board        = new(width:   width,
-                           height:  height,
-                           players: players)
-      end
-    end
 
     def initialize(width: 8, height: 8, players:)
       limit_and_set_board_dimensions(width, height)
       @players = players
       @rows    = []
-      @column_headers = COLUMN_HEADERS[0..(@width - 1)]
+      @column_headers = ConnectFour::Constants::COLUMN_HEADERS[0..(@width - 1)]
 
       # initialize board as two-dimensional array
       @height.times do

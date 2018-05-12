@@ -1,5 +1,5 @@
 module ConnectFour
-  module Prompt
+  module SetupPrompt
     include ConnectFour::DrawHelper
 
     def prompt_for_game_mode
@@ -44,19 +44,26 @@ module ConnectFour
     end
 
     def prompt_for_player_names(player_count)
-      players = []
+      player_names
       player_count.times do |i|
         clear_screen
         print_logo
         id = i + 1
         center_print "Please enter name for player #{id} ( defaults to 'Player'): "
         name = gets.chomp.strip
-        name = "Player" if name.empty?
-        players << ConnectFour::Player.new(id: id, name: name)
+        player_names << name
+      end
+      players_names
+    end
+
+    def generate_players_from_player_names(player_names)
+      players = []
+      player_names.each_with_index do |player_name, index|
+        name = "Player" if player_name.empty?
+        players << ConnectFour::Player.new(id: index + 1, name: name)
       end
       players
     end
-
 
     def prompt_for_board_width(player_count)
       clear_screen
