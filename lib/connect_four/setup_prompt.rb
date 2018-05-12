@@ -31,7 +31,7 @@ module ConnectFour
     def prompt_for_player_count
       clear_screen
       print_logo
-      max_players = ConnectFour::Board::MAX_PLAYER_COUNT
+      max_players = ConnectFour::Constants::MAX_PLAYER_COUNT
       center_print "Please enter number of players (2-#{max_players}): "
       player_count = gets.chomp.to_i
       until (2..max_players) === player_count
@@ -44,7 +44,7 @@ module ConnectFour
     end
 
     def prompt_for_player_names(player_count)
-      player_names
+      player_names = []
       player_count.times do |i|
         clear_screen
         print_logo
@@ -53,7 +53,7 @@ module ConnectFour
         name = gets.chomp.strip
         player_names << name
       end
-      players_names
+      player_names
     end
 
     def generate_players_from_player_names(player_names)
@@ -68,8 +68,8 @@ module ConnectFour
     def prompt_for_board_width(player_count)
       clear_screen
       print_logo
-      min_board_width = ConnectFour::Board::MIN_BOARD_WIDTH
-      max_board_width = ConnectFour::Board::MAX_BOARD_WIDTH
+      min_board_width = ConnectFour::Constants::MIN_BOARD_WIDTH
+      max_board_width = ConnectFour::Constants::MAX_BOARD_WIDTH
       center_print "Please enter board width " +
                    "(#{min_board_width}-" +
                    "#{max_board_width}). " +
@@ -88,8 +88,8 @@ module ConnectFour
     def prompt_for_board_height(player_count)
       clear_screen
       print_logo
-      min_board_height = ConnectFour::Board::MIN_BOARD_HEIGHT
-      max_board_height = ConnectFour::Board::MAX_BOARD_HEIGHT
+      min_board_height = ConnectFour::Constants::MIN_BOARD_HEIGHT
+      max_board_height = ConnectFour::Constants::MAX_BOARD_HEIGHT
       center_print "Please enter board height " +
                    "(#{min_board_height}-" +
                    "#{max_board_height}). " +

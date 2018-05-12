@@ -50,7 +50,7 @@ module ConnectFour
       end
 
       def prompt_for_column_to_play(player)
-        if @players.size == MIN_PLAYER_COUNT
+        if @players.size == ConnectFour::Constants::MIN_PLAYER_COUNT
           player_id = player.id == 1 ? "X" : "O"
         else
           player_id = player.id
@@ -66,26 +66,26 @@ module ConnectFour
 
       def limit_and_set_board_dimensions(width, height)
         # limit and set board width
-        if width  <  MIN_BOARD_WIDTH
-          @width = MIN_BOARD_WIDTH
+        if width  <  ConnectFour::Constants::MIN_BOARD_WIDTH
+          @width = ConnectFour::Constants::MIN_BOARD_WIDTH
           puts "The width value you provided was too low. " +
-               "Width was set to #{MIN_BOARD_WIDTH} (min value)."
-        elsif width > MAX_BOARD_WIDTH
-          @width = MAX_BOARD_WIDTH
+               "Width was set to #{@width} (min value)."
+        elsif width > ConnectFour::Constants::MAX_BOARD_WIDTH
+          @width = ConnectFour::Constants::MAX_BOARD_WIDTH
           puts "The width value you provided was too high. " +
-               "Width was set to #{MAX_BOARD_WIDTH} (max value)."
+               "Width was set to #{@width} (max value)."
         else
           @width = width
         end
         # limit and set board height
-        if height  <  MIN_BOARD_HEIGHT
-          @height = MIN_BOARD_HEIGHT
+        if height  <  ConnectFour::Constants::MIN_BOARD_HEIGHT
+          @height = ConnectFour::Constants::MIN_BOARD_HEIGHT
           puts "The height value you provided was too low. " +
-               "Height was set to #{MIN_BOARD_HEIGHT} (min value)."
-        elsif height > MAX_BOARD_HEIGHT
-          @height = MAX_BOARD_HEIGHT
+               "Height was set to #{@height} (min value)."
+        elsif height > ConnectFour::Constants::MAX_BOARD_HEIGHT
+          @height = ConnectFour::Constants::MAX_BOARD_HEIGHT
           puts "The height value you provided was too high. " +
-               "Height was set to #{MAX_BOARD_HEIGHT} (max value)."
+               "Height was set to #{@height} (max value)."
         else
           @height = height
         end

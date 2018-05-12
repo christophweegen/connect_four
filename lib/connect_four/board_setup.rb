@@ -1,3 +1,6 @@
+require_relative 'setup_prompt'
+require_relative 'constants'
+
 module ConnectFour
   class BoardSetup < Hash
     include ConnectFour::SetupPrompt
