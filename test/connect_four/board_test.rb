@@ -26,9 +26,9 @@ class BoardTest < ConnectFourSpec
 
   def test_board_with_dimensions_too_high
     b = ConnectFour::Board.new(width: 100, height: 100, players: @players)
-    assert_equal b.width,     ConnectFour::Board::MAX_BOARD_WIDTH
-    assert_equal b.height,    ConnectFour::Board::MAX_BOARD_HEIGHT
-    assert_equal b.column_headers,   ConnectFour::Board::COLUMN_HEADERS
-    assert_equal b.rows.size, ConnectFour::Board::MAX_BOARD_HEIGHT
+    assert_equal b.width,          ConnectFour::Constants::MAX_BOARD_WIDTH
+    assert_equal b.height,         ConnectFour::Constants::MAX_BOARD_HEIGHT
+    assert_equal b.column_headers, ConnectFour::Constants::COLUMN_HEADERS
+    assert_equal b.rows.size,      ConnectFour::Constants::MAX_BOARD_HEIGHT
   end
 end
