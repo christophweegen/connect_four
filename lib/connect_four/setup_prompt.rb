@@ -1,107 +1,108 @@
 module ConnectFour
   module SetupPrompt
-    include ConnectFour::DrawHelper
-
-    def prompt_for_game_mode
-      clear_screen
-      print_logo
-      center_puts "Welcome to Multiplayer Connect Four!"
-      puts
-      center_puts "Please choose game mode:"
-      puts
-      center_puts "-----------------------------------------------------------------------"
-      center_puts "1) Classic Mode     | Players: 2      | Board Size: 8x8               "
-      center_puts "-----------------------------------------------------------------------"
-      center_puts "2) Multiplayer Mode | Up to 5 Players | Board Size: From 8x8 to 61x100"
-      center_puts "-----------------------------------------------------------------------"
-      puts
-      center_print "Enter number of game mode: "
-      game_mode = gets.chomp.to_i
-      until (1..2) === game_mode
+    extend ConnectFour::DrawHelper
+    class << self
+      def prompt_for_game_mode
         clear_screen
         print_logo
-        center_puts "Game mode invalid. Please enter 1 for Classic Mode " +
-             "or 2 for Multiplayer Mode."
+        center_puts "Welcome to Multiplayer Connect Four!"
+        puts
+        center_puts "Please choose game mode:"
+        puts
+        center_puts "-----------------------------------------------------------------------"
+        center_puts "1) Classic Mode     | Players: 2      | Board Size: 8x8               "
+        center_puts "-----------------------------------------------------------------------"
+        center_puts "2) Multiplayer Mode | Up to 5 Players | Board Size: From 8x8 to 61x100"
+        center_puts "-----------------------------------------------------------------------"
+        puts
         center_print "Enter number of game mode: "
         game_mode = gets.chomp.to_i
+        until (1..2) === game_mode
+          clear_screen
+          print_logo
+          center_puts "Game mode invalid. Please enter 1 for Classic Mode " +
+               "or 2 for Multiplayer Mode."
+          center_print "Enter number of game mode: "
+          game_mode = gets.chomp.to_i
+        end
+        game_mode
       end
-      game_mode
-    end
 
-    def prompt_for_player_count
-      clear_screen
-      print_logo
-      max_players = ConnectFour::Constants::MAX_PLAYER_COUNT
-      center_print "Please enter number of players (2-#{max_players}): "
-      player_count = gets.chomp.to_i
-      until (2..max_players) === player_count
-        clear_screen
-        center_puts "Number of players invalid. Please enter a number from 2 to #{max_players}."
-        center_print "Please enter number of players (2-#{max_players}): "
-        player_count = gets.chomp.to_i
-      end
-      player_count
-    end
-
-    def prompt_for_player_names(player_count)
-      player_names = []
-      player_count.times do |i|
+      def prompt_for_player_count
         clear_screen
         print_logo
-        id = i + 1
-        center_print "Please enter name for player #{id} ( defaults to 'Player'): "
-        name = gets.chomp.strip
-        player_names << name
+        max_players = ConnectFour::Constants::MAX_PLAYER_COUNT
+        center_print "Please enter number of players (2-#{max_players}): "
+        player_count = gets.chomp.to_i
+        until (2..max_players) === player_count
+          clear_screen
+          center_puts "Number of players invalid. Please enter a number from 2 to #{max_players}."
+          center_print "Please enter number of players (2-#{max_players}): "
+          player_count = gets.chomp.to_i
+        end
+        player_count
       end
-      player_names
-    end
 
-    def generate_players_from_player_names(player_names)
-      players = []
-      player_names.each_with_index do |player_name, index|
-        name = "Player" if player_name.empty?
-        players << ConnectFour::Player.new(id: index + 1, name: name)
+      def prompt_for_player_names(player_count)
+        player_names = []
+        player_count.times do |i|
+          clear_screen
+          print_logo
+          id = i + 1
+          center_print "Please enter name for player #{id} ( defaults to 'Player'): "
+          name = gets.chomp.strip
+          player_names << name
+        end
+        player_names
       end
-      players
-    end
 
-    def prompt_for_board_width(player_count)
-      clear_screen
-      print_logo
-      min_board_width = ConnectFour::Constants::MIN_BOARD_WIDTH
-      max_board_width = ConnectFour::Constants::MAX_BOARD_WIDTH
-      center_print "Please enter board width " +
-                   "(#{min_board_width}-" +
-                   "#{max_board_width}). " +
-                   "To provide a good experience for #{player_count} Players, " +
-                   "width should be at least #{player_count * 4}: "
-      width = gets.chomp.to_i
-      until (min_board_width..max_board_width) === width
+      def generate_players_from_player_names(player_names)
+        players = []
+        player_names.each_with_index do |player_name, index|
+          name = "Player" if player_name.empty?
+          players << ConnectFour::Player.new(id: index + 1, name: name)
+        end
+        players
+      end
+
+      def prompt_for_board_width(player_count)
         clear_screen
-        center_print "Width invalid. Please enter a number from " +
-                     "#{min_board_width} to #{max_board_width}: "
+        print_logo
+        min_board_width = ConnectFour::Constants::MIN_BOARD_WIDTH
+        max_board_width = ConnectFour::Constants::MAX_BOARD_WIDTH
+        center_print "Please enter board width " +
+                     "(#{min_board_width}-" +
+                     "#{max_board_width}). " +
+                     "To provide a good experience for #{player_count} Players, " +
+                     "width should be at least #{player_count * 4}: "
         width = gets.chomp.to_i
+        until (min_board_width..max_board_width) === width
+          clear_screen
+          center_print "Width invalid. Please enter a number from " +
+                       "#{min_board_width} to #{max_board_width}: "
+          width = gets.chomp.to_i
+        end
+        width
       end
-      width
-    end
 
-    def prompt_for_board_height(player_count)
-      clear_screen
-      print_logo
-      min_board_height = ConnectFour::Constants::MIN_BOARD_HEIGHT
-      max_board_height = ConnectFour::Constants::MAX_BOARD_HEIGHT
-      center_print "Please enter board height " +
-                   "(#{min_board_height}-" +
-                   "#{max_board_height}). " +
-                   "To provide a good experience for #{player_count} Players, " +
-                   "height should be at least #{player_count.to_i * 4}: "
-      height = gets.chomp.to_i
-      until (min_board_height..max_board_height) === height
+      def prompt_for_board_height(player_count)
         clear_screen
-        center_print "Width invalid. Please enter a number from #{min_board_width} to #{max_board_width}: "
+        print_logo
+        min_board_height = ConnectFour::Constants::MIN_BOARD_HEIGHT
+        max_board_height = ConnectFour::Constants::MAX_BOARD_HEIGHT
+        center_print "Please enter board height " +
+                     "(#{min_board_height}-" +
+                     "#{max_board_height}). " +
+                     "To provide a good experience for #{player_count} Players, " +
+                     "height should be at least #{player_count.to_i * 4}: "
         height = gets.chomp.to_i
+        until (min_board_height..max_board_height) === height
+          clear_screen
+          center_print "Width invalid. Please enter a number from #{min_board_width} to #{max_board_width}: "
+          height = gets.chomp.to_i
+        end
+        height
       end
-      height
     end
   end
 end
