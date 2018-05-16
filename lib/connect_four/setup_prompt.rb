@@ -59,8 +59,8 @@ module ConnectFour
       def generate_players_from_player_names(player_names)
         players = []
         player_names.each_with_index do |player_name, index|
-          name = "Player" if player_name.empty?
-          players << ConnectFour::Player.new(id: index + 1, name: name)
+          player_name = "Player" if player_name.empty?
+          players << ConnectFour::Player.new(id: index + 1, name: player_name)
         end
         players
       end
