@@ -5,8 +5,8 @@ module ConnectFour
   class BoardSetup < Hash
     def initialize
       game_mode = ConnectFour::SetupPrompt.prompt_for_game_mode
-
-      case game_mode
+      valid_game_mode = ConnectFour::SetupPrompt.prompt_for_valid_game_mode(game_mode)
+      case valid_game_mode
       when ConnectFour::Constants::CLASSIC_MODE
         # initialize 2 Players & Classic Board
         player_count   = ConnectFour::Constants::MIN_PLAYER_COUNT

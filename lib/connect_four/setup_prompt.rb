@@ -17,6 +17,9 @@ module ConnectFour
         puts
         center_print "Enter number of game mode: "
         game_mode = gets.chomp.to_i
+      end
+
+      def prompt_for_valid_game_mode(game_mode)
         until (1..2) === game_mode
           clear_screen
           print_logo
