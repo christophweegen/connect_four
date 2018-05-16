@@ -6,7 +6,7 @@ describe ConnectFour::SetupPrompt do
 
   subject { ->(player_count) { ConnectFour::SetupPrompt.prompt_for_player_names(player_count) } }
 
-  describe "::prompt_for_player_count" do
+  describe "::prompt_for_player_names" do
     it "returns player_names as an Array stripped off whitespace" do
       mock_user_input("   Tom  \n Jerry    \n")
       player_names = subject.call(2)
