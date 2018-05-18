@@ -31,7 +31,7 @@ module ConnectFour
     def draw_board
       clear_screen
       print_logo
-      center_puts @column_headers.join(' ')
+      put_column_headers
       @rows.each do |row|
         row_string = ""
         slots_filled_in_row = 0
@@ -52,6 +52,11 @@ module ConnectFour
         end
         center_puts((' ' * 11 * slots_filled_in_row) + row_string)
       end
+      put_column_headers
+    end
+
+    def put_column_headers
+      center_puts @column_headers.join(' ')
     end
 
     def draw_winner_board(winner)
