@@ -35,8 +35,8 @@ describe "ConnectFour::ColumnValidator#valid_column?" do
   end
 
   describe "with max board dimensions" do
-    let(:width)  { 99 }
-    let(:height) { 99 }
+    let(:width)  { ConnectFour::Constants::MAX_BOARD_WIDTH }
+    let(:height) { ConnectFour::Constants::MAX_BOARD_HEIGHT }
     let(:board) do
       ConnectFour::Board.new(width: width, height: height, players: players)
     end

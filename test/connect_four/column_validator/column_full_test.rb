@@ -46,9 +46,9 @@ describe ConnectFour::ColumnValidator do
     end
   end
 
-  describe "with default/min board dimensions" do
-    let(:width)  { 99 }
-    let(:height) { 99 }
+  describe "with max board dimensions" do
+    let(:width)  { ConnectFour::Constants::MAX_BOARD_WIDTH }
+    let(:height) { ConnectFour::Constants::MAX_BOARD_HEIGHT }
     let(:board) do
       ConnectFour::Board.new(width: width,
                              height: height,
