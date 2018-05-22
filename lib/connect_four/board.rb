@@ -25,7 +25,8 @@ module ConnectFour
       @players.cycle do |player|
         draw_board
         puts
-        claim_slot(player)
+        column = prompt_for_column_to_play(player)
+        claim_slot(player: player, column: column)
         winner_checker = ConnectFour::WinnerChecker.new(rows: @rows, players: @players)
         winner = winner_checker.check_for_winner
         if winner
@@ -36,8 +37,7 @@ module ConnectFour
     end
 
     private
-      def claim_slot(player)
-        column = prompt_for_column_to_play(player)
+      def claim_slot(player:, column:)
         index_of_column = @column_headers.index(column)
         @rows.reverse_each do |row|
           if row[index_of_column].nil?
