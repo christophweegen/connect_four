@@ -2,6 +2,8 @@ require 'rubygems'
 require 'bundler/setup'
 require 'minitest/autorun'
 
+require 'pry'
+
 require 'connect_four'
 require 'connect_four/player'
 require 'connect_four/board'
