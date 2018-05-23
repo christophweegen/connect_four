@@ -5,8 +5,9 @@ module ConnectFour
     module UserInput
       OLD_STDIN = $stdin
 
-      def mock_user_input(input)
-        $stdin = StringIO.new("#{input}" + "\n")
+      def mock_user_input(*input)
+        input = input.join("\n") + "\n"
+        $stdin = StringIO.new(input)
       end
 
       def reset_stdin

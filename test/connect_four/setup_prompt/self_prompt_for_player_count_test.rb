@@ -16,7 +16,7 @@ describe ConnectFour::SetupPrompt do
     end
 
     it "rejects invalid player_count and asks for new player count until valid" do
-      mock_user_input("1\n6\n-10\n12\na\nz\n5\nc\n")
+      mock_user_input(1, 6, -10, 12, "a", "z", 5, "c")
       game_mode = subject.call
       assert_equal 5, game_mode
     end

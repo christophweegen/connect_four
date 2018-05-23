@@ -7,6 +7,7 @@ require 'pry'
 require 'connect_four'
 require 'connect_four/player'
 require 'connect_four/board'
+require 'connect_four/board_setup'
 require 'connect_four/constants'
 require 'connect_four/setup_prompt'
 

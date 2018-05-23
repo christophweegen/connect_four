@@ -32,7 +32,7 @@ describe "ConnectFour::ColumnValidator#check_for_valid_and_empty_column" do
   describe "when column invalid" do
     it "prompts for valid column until column valid" do
       invalid_columns.each do |column|
-        mock_user_input("aa\n#{column}\nbb\n1\n")
+        mock_user_input("aa", column, "bb", 1)
         valid_column = board.instance_exec(column, players[0]) do |column, player|
                          check_for_valid_and_empty_column(column: column,
                                                           player: player)
