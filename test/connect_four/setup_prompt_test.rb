@@ -1,9 +1,9 @@
 require 'test_helper'
 
 describe ConnectFour::SetupPrompt do
-  describe ".generate_players_from_player_names" do
-    after { reset_stdin }
+  after { reset_stdin }
 
+  describe ".generate_players_from_player_names" do
     subject { ->(player_names) { ConnectFour::SetupPrompt.generate_players_from_player_names(player_names) } }
 
     it "has 'Player' as default name" do
@@ -38,8 +38,6 @@ describe ConnectFour::SetupPrompt do
   end
 
   describe ".prompt_for_game_mode" do
-    after { reset_stdin }
-
     subject { -> { ConnectFour::SetupPrompt.prompt_for_game_mode } }
 
     it "gets valid user input" do
@@ -56,8 +54,6 @@ describe ConnectFour::SetupPrompt do
   end
 
   describe ".prompt_for_player_count" do
-    after { reset_stdin }
-
     subject { -> { ConnectFour::SetupPrompt.prompt_for_player_count } }
 
     it "returns valid player count if player count between 2-5" do
@@ -76,8 +72,6 @@ describe ConnectFour::SetupPrompt do
   end
 
   describe ".prompt_for_valid_game_mode" do
-    after { reset_stdin }
-
     subject { ->(game_mode) { ConnectFour::SetupPrompt.prompt_for_valid_game_mode(game_mode) } }
 
     it "returns valid game mode" do
@@ -94,8 +88,6 @@ describe ConnectFour::SetupPrompt do
   end
 
   describe ".generate_players_from_player_names" do
-    after { reset_stdin }
-
     subject { ->(player_names) { ConnectFour::SetupPrompt.generate_players_from_player_names(player_names) } }
 
     it "has 'Player' as default name" do
@@ -130,8 +122,6 @@ describe ConnectFour::SetupPrompt do
   end
 
   describe ".prompt_for_player_names" do
-    after { reset_stdin }
-
     subject { ->(player_count) { ConnectFour::SetupPrompt.prompt_for_player_names(player_count) } }
 
     it "returns player_names as an Array stripped off whitespace" do
