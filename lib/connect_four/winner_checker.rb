@@ -5,9 +5,9 @@ module ConnectFour
     USELESS_LAST_ROWS_TO_CHECK = 3
     # CONSECUTIVE_SLOTS_NEEDED_TO_WIN = 4
 
-    def initialize(rows:, players:)
-      @rows = rows
-      @players = players
+    def initialize(board:)
+      @rows = board.rows
+      @players = board.players
     end
 
     def check_for_winner

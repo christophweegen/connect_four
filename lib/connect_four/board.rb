@@ -27,7 +27,7 @@ module ConnectFour
         puts
         column = prompt_for_column_to_play(player)
         claim_slot(player: player, column: column)
-        winner_checker = ConnectFour::WinnerChecker.new(rows: @rows, players: @players)
+        winner_checker = ConnectFour::WinnerChecker.new(board: self)
         winner = winner_checker.check_for_winner
         if winner
           draw_winner_board(winner)
