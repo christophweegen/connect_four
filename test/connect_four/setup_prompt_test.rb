@@ -130,4 +130,46 @@ describe ConnectFour::SetupPrompt do
       assert_equal ["Tom", "Jerry"], player_names
     end
   end
+
+  describe ".prompt_for_board_width" do
+    subject { ->(board_width) { ConnectFour::SetupPrompt.prompt_for_board_width(board_width) } }
+    let(:min) { ConnectFour::Constants::MIN_BOARD_WIDTH }
+    let(:max) { ConnectFour::Constants::MAX_BOARD_WIDTH }
+    let(:player_count) { 2 }
+
+    it "returns valid board width if board width between 8-61" do
+      (min..max).each do |i|
+        mock_user_input(i)
+        valid_width = subject.call(player_count)
+        assert_equal i, valid_width
+      end
+    end
+
+    it "rejects invalid board width and asks for new board width until valid" do
+      mock_user_input(1, 7, -10, 62, "a", "z", 30, "c")
+      valid_width = subject.call(player_count)
+      assert_equal 30, valid_width
+    end
+  end
+
+  describe ".prompt_for_board_height" do
+    subject { ->(board_height) { ConnectFour::SetupPrompt.prompt_for_board_height(board_height) } }
+    let(:min) { ConnectFour::Constants::MIN_BOARD_HEIGHT }
+    let(:max) { ConnectFour::Constants::MAX_BOARD_HEIGHT }
+    let(:player_count) { 2 }
+
+    it "returns valid board height if board height between 8-100" do
+      (min..max).each do |i|
+        mock_user_input(i)
+        valid_height = subject.call(player_count)
+        assert_equal i, valid_height
+      end
+    end
+
+    it "rejects invalid board height and asks for new board height until valid" do
+      mock_user_input(1, 7, -10, 101, "a", "z", 50, "c")
+      valid_height = subject.call(player_count)
+      assert_equal 50, valid_height
+    end
+  end
 end

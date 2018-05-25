@@ -101,7 +101,7 @@ module ConnectFour
         height = gets.chomp.to_i
         until (min_board_height..max_board_height) === height
           clear_screen
-          center_print "Width invalid. Please enter a number from #{min_board_width} to #{max_board_width}: "
+          center_print "Width invalid. Please enter a number from #{min_board_height} to #{max_board_height}: "
           height = gets.chomp.to_i
         end
         height
