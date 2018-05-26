@@ -11,7 +11,7 @@ require 'connect_four/board_setup'
 require 'connect_four/constants'
 require 'connect_four/setup_prompt'
 
-# require 'connect_four/test_helpers/board_generator'
+require 'connect_four/test_helpers/board_generator'
 require 'connect_four/test_helpers/user_input'
 
 require "minitest/reporters"
