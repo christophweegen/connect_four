@@ -5,7 +5,7 @@ module ConnectFour
     include ColorOutput
 
     def clear_screen
-      system "clear" or system "cls"
+      # system "clear" or system "cls"
     end
 
     def center(string)
